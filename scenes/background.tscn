@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://bj38ptr2vfcrb"]
+
+[ext_resource type="Texture2D" uid="uid://ddgalr6hxs4wb" path="res://assets/Clouds 2/1.png" id="1_cbsqf"]
+[ext_resource type="Texture2D" uid="uid://qcl60b3dwbfp" path="res://assets/Clouds 2/2.png" id="2_wisxt"]
+[ext_resource type="Texture2D" uid="uid://tmj7syyin7bf" path="res://assets/Clouds 2/3.png" id="3_wax1t"]
+[ext_resource type="Texture2D" uid="uid://y4xabm37kedg" path="res://assets/Clouds 2/4.png" id="4_1tmhi"]
+
+[sub_resource type="GDScript" id="GDScript_cbsqf"]
+script/source = "extends ParallaxBackground
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	scroll_offset.x -= 200 * delta
+"
+
+[node name="Background" type="ParallaxBackground"]
+script = SubResource("GDScript_cbsqf")
+
+[node name="Sky" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sky"]
+scale = Vector2(2, 2)
+texture = ExtResource("1_cbsqf")
+centered = false
+
+[node name="Far clouds" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Far clouds"]
+scale = Vector2(2, 2)
+texture = ExtResource("2_wisxt")
+centered = false
+
+[node name="Middle clouds" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.4, 0.4)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Middle clouds"]
+scale = Vector2(2, 2)
+texture = ExtResource("3_wax1t")
+centered = false
+
+[node name="Near clouds" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.7, 0.7)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Near clouds"]
+scale = Vector2(2, 2)
+texture = ExtResource("4_1tmhi")
+centered = false

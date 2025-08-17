@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0dybtiulqg1x"]
+
+[ext_resource type="Script" uid="uid://c634xwrqlofka" path="res://scenes/ground.gd" id="1_pybca"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ylpw"]
+size = Vector2(1151, 79)
+
+[node name="Ground" type="Area2D"]
+script = ExtResource("1_pybca")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(576.5, 39)
+shape = SubResource("RectangleShape2D_7ylpw")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
