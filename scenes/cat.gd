@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
-const GRAVITY : int = 1000
+const GRAVITY : int = 1500
 const MAX_VEL : int = 600
 const JUMP_SPEED : int = -500 # how many pixels the cat jumps
 var flying : bool = false
 var falling : bool = false
-const START_POS = Vector2(100,250)
+const START_POS = Vector2(200,250)
 
 #called when node is ready
 func _ready():
