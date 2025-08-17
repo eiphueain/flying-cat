@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://cjei1i8i4xsor"]
+
+[ext_resource type="Texture2D" uid="uid://b3455he41vi5h" path="res://assets/pipe.png" id="1_8x3ej"]
+[ext_resource type="Script" uid="uid://tmx7vwae1o0" path="res://scenes/pipe.gd" id="1_arpqm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_arpqm"]
+size = Vector2(77.5, 36.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8p0di"]
+size = Vector2(72.5, 522.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ejsh2"]
+size = Vector2(77.5, 35)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ybk5"]
+size = Vector2(72.5, 525)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tdldm"]
+size = Vector2(40, 190)
+
+[node name="Pipe" type="Area2D" groups=["pipes"]]
+script = ExtResource("1_arpqm")
+
+[node name="Lower" type="Sprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_8x3ej")
+offset = Vector2(0, 400)
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 110)
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_arpqm")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 334)
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_8p0di")
+
+[node name="Upper" type="Sprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_8x3ej")
+offset = Vector2(0, -400)
+flip_v = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(0, -110)
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_ejsh2")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2(2.71051e-20, -336)
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_4ybk5")
+
+[node name="ScoreArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea"]
+position = Vector2(53, 0)
+shape = SubResource("RectangleShape2D_tdldm")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="ScoreArea" to="." method="_on_score_area_body_entered"]

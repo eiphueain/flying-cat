@@ -11,4 +11,11 @@ config_version=5
 [application]
 
 config/name="Anni gift"
+run/main_scene="uid://bbtsp7cgs34ge"
 config/features=PackedStringArray("4.4", "Forward Plus")
+
+[display]
+
+window/size/window_width_override=1152
+window/size/window_height_override=648
+window/stretch/mode="canvas_items"

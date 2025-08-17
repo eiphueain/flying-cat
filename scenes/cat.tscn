@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://b160id05sov32"]
+
+[ext_resource type="Texture2D" uid="uid://vivdbyl35qyj" path="res://assets/WitchFlying.png" id="1_myi5k"]
+[ext_resource type="Script" uid="uid://cwgm76ji55856" path="res://scenes/cat.gd" id="1_se5fe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_se5fe"]
+atlas = ExtResource("1_myi5k")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8pth"]
+atlas = ExtResource("1_myi5k")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7vi38"]
+atlas = ExtResource("1_myi5k")
+region = Rect2(96, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxap7"]
+atlas = ExtResource("1_myi5k")
+region = Rect2(144, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tol8a"]
+atlas = ExtResource("1_myi5k")
+region = Rect2(192, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o55mh"]
+atlas = ExtResource("1_myi5k")
+region = Rect2(240, 0, 48, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ic5u8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_se5fe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8pth")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7vi38")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxap7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tol8a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o55mh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8px16"]
+radius = 26.0
+height = 62.0
+
+[node name="Cat" type="CharacterBody2D"]
+script = ExtResource("1_se5fe")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_ic5u8")
+frame = 5
+frame_progress = 0.373407
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(14, 16)
+shape = SubResource("CapsuleShape2D_8px16")
