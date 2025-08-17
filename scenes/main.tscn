@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bbtsp7cgs34ge"]
+[gd_scene load_steps=7 format=3 uid="uid://bbtsp7cgs34ge"]
 
 [ext_resource type="Script" uid="uid://dag0c3b3m4nlx" path="res://scenes/main.gd" id="1_tefeu"]
 [ext_resource type="PackedScene" uid="uid://cjei1i8i4xsor" path="res://scenes/pipe.tscn" id="2_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://bj38ptr2vfcrb" path="res://scenes/background.tscn" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://b160id05sov32" path="res://scenes/cat.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://c6243776mjo7w" path="res://scenes/game_over.tscn" id="5_tefeu"]
+[ext_resource type="PackedScene" uid="uid://d0dybtiulqg1x" path="res://scenes/ground.tscn" id="6_tefeu"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_tefeu")
@@ -31,5 +32,9 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 36
 text = "Score: 0"
 
+[node name="Ground" parent="." instance=ExtResource("6_tefeu")]
+position = Vector2(0, 648)
+
 [connection signal="timeout" from="PipeTimer" to="." method="_on_pipe_timer_timeout"]
 [connection signal="restart" from="Game_over" to="." method="_on_game_over_restart"]
+[connection signal="hit" from="Ground" to="." method="_on_ground_hit"]

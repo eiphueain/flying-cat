@@ -36,7 +36,7 @@ func _input(event):
 				else:
 					if $Cat.flying:
 						$Cat.jump()
-						check_top_bottom()
+						check_top()
 
 func start_game():
 	game_running = true
@@ -53,7 +53,7 @@ func _process(delta):
 		$Background.scroll_offset.x = 0
 		
 	
-func check_top_bottom():
+func check_top():
 	if $Cat.position.y < 0 or $Cat.position.y > 648:
 		$Cat.falling = true
 		stop_game()
@@ -72,7 +72,7 @@ func generate_pipe():
 	var pipe = pipe_scene.instantiate()
 	pipe.position.x = screen_size.x + PIPE_DELAY
 	pipe.position.y = screen_size.y / 2 + randi_range(-PIPE_RANGE, PIPE_RANGE)
-	pipe.hit.connect(bird_hit)
+	pipe.hit.connect(cat_hit)
 	pipe.scored.connect(scored)
 	add_child(pipe)
 	pipes.append(pipe) 
@@ -81,9 +81,13 @@ func scored():
 	score += 1
 	$ScoreLabel.text = "Score: " + str(score)
 	
-func bird_hit():
+func cat_hit():
 	$Cat.falling = true
 	stop_game()
 	
 func _on_game_over_restart():
 	new_game()
+
+func _on_ground_hit() -> void:
+	$Cat.falling = false
+	stop_game()
