@@ -24,7 +24,7 @@ func _physics_process(delta):
 		if velocity.y > MAX_VEL:
 			velocity.y = MAX_VEL
 		if flying:
-			set_rotation(deg_to_rad(velocity.y * 0.05))
+			set_rotation(deg_to_rad(velocity.y * 0.01))
 			$AnimatedSprite2D.play()
 		elif falling:
 			set_rotation(PI/2)
