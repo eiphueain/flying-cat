@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://b160id05sov32"]
+[gd_scene load_steps=12 format=3 uid="uid://b160id05sov32"]
 
 [ext_resource type="Texture2D" uid="uid://vivdbyl35qyj" path="res://assets/WitchFlying.png" id="1_myi5k"]
 [ext_resource type="Script" uid="uid://cwgm76ji55856" path="res://scenes/cat.gd" id="1_se5fe"]
+[ext_resource type="AudioStream" uid="uid://fmhdhsqxg2as" path="res://assets/Jump.wav" id="3_t8pth"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_se5fe"]
 atlas = ExtResource("1_myi5k")
@@ -71,3 +72,6 @@ flip_h = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(14, 16)
 shape = SubResource("CapsuleShape2D_8px16")
+
+[node name="sfx_jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_t8pth")
