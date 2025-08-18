@@ -1,6 +1,9 @@
 extends Node
 
 @export var pipe_scene : PackedScene
+@onready var sfx_swoosh: AudioStreamPlayer = $sfx_swoosh
+@onready var sfx_score: AudioStreamPlayer = $sfx_score
+@onready var sfx_fall: AudioStreamPlayer = $sfx_fall
 
 var game_running: bool = false
 var game_over : bool = false
@@ -12,7 +15,7 @@ var screen_size : Vector2i
 var pipes : Array
 const PIPE_DELAY : int = 200
 const PIPE_RANGE : int = 200
-
+var fall_sound_played : bool 
 func _ready():
 	screen_size = get_window().size
 	new_game()
@@ -28,6 +31,7 @@ func new_game():
 	generate_pipe()
 	$Cat.reset()
 	$Background.scroll_offset.x = 0
+	fall_sound_played = false
 
 func _input(event):
 	if game_over == false:
@@ -35,6 +39,7 @@ func _input(event):
 			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 				if game_running == false:
 					start_game()
+					$sfx_swoosh.play()
 				else:
 					if $Cat.flying:
 						$Cat.jump()
@@ -55,6 +60,7 @@ func _process(delta):
 		$Background.scroll_offset.x = 0
 	if $Cat.falling == true:
 		$Background.scroll_offset.x = game_over_position
+		
 func check_top():
 	if $Cat.position.y < 0:
 		$Cat.falling = true
@@ -67,6 +73,10 @@ func stop_game():
 	game_running = false
 	game_over = true
 	game_over_position = $Background.get_scroll_offset().x
+	if fall_sound_played == false:
+		$sfx_fall.play()
+		fall_sound_played = true
+	
 
 func _on_pipe_timer_timeout() -> void:
 	generate_pipe()
@@ -83,6 +93,7 @@ func generate_pipe():
 func scored():
 	score += 1
 	$ScoreLabel.text = "Score: " + str(score)
+	$sfx_score.play()
 	
 func cat_hit():
 	$Cat.falling = true

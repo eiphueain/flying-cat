@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjei1i8i4xsor"]
+[gd_scene load_steps=9 format=3 uid="uid://cjei1i8i4xsor"]
 
 [ext_resource type="Texture2D" uid="uid://b3455he41vi5h" path="res://assets/pipe.png" id="1_8x3ej"]
 [ext_resource type="Script" uid="uid://tmx7vwae1o0" path="res://scenes/pipe.gd" id="1_arpqm"]
+[ext_resource type="AudioStream" uid="uid://bcsygah521vbl" path="res://assets/hit.mp3" id="3_8p0di"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_arpqm"]
 size = Vector2(77.5, 36.25)
@@ -58,6 +59,9 @@ shape = SubResource("RectangleShape2D_4ybk5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea"]
 position = Vector2(53, 0)
 shape = SubResource("RectangleShape2D_tdldm")
+
+[node name="sfx_hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_8p0di")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="ScoreArea" to="." method="_on_score_area_body_entered"]

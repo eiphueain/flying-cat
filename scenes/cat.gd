@@ -1,4 +1,5 @@
 extends CharacterBody2D
+@onready var sfx_jump: AudioStreamPlayer = $sfx_jump
 
 const GRAVITY : int = 1500
 const MAX_VEL : int = 600
@@ -35,3 +36,4 @@ func _physics_process(delta):
 		
 func jump():
 	velocity.y = JUMP_SPEED
+	$sfx_jump.play()
