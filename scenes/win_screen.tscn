@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b2ymo15srpb1b"]
+
+[node name="WinScreen" type="Node"]
+
+[node name="CatVideoPlayer" type="VideoStreamPlayer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
