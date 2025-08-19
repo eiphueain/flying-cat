@@ -55,7 +55,7 @@ func _process(delta):
 	if game_running:
 		$Background.scroll_offset.x -= SCROLL_SPEED * delta
 		for pipe in pipes:
-			pipe.position.x -= 0.35
+			pipe.position.x -= SCROLL_SPEED * 4 * delta
 	else:
 		$Background.scroll_offset.x = 0
 	if $Cat.falling == true:
