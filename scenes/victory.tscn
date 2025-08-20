@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bt2we241cwq6b"]
+
+[ext_resource type="Texture2D" uid="uid://vivdbyl35qyj" path="res://assets/WitchFlying.png" id="1_le47n"]
+
+[node name="Victory" type="Node"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_le47n")
