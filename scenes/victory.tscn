@@ -1,8 +1,131 @@
-[gd_scene load_steps=2 format=3 uid="uid://bt2we241cwq6b"]
+[gd_scene load_steps=7 format=3 uid="uid://bt2we241cwq6b"]
 
-[ext_resource type="Texture2D" uid="uid://vivdbyl35qyj" path="res://assets/WitchFlying.png" id="1_le47n"]
+[ext_resource type="Script" uid="uid://6lb54xbjfb0r" path="res://scenes/victory.gd" id="1_le47n"]
+[ext_resource type="Texture2D" uid="uid://d3kf6w5bno7j3" path="res://assets/spinning_cat.png" id="2_hl81x"]
+[ext_resource type="AudioStream" uid="uid://cmbvfkj2d3g6r" path="res://assets/spinning_cat_audio.mp3" id="3_73dpb"]
+
+[sub_resource type="Animation" id="Animation_faxov"]
+resource_name = "rave_bg"
+length = 30.0
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 59.79,
+"start_offset": 0.0,
+"stream": ExtResource("3_73dpb")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_73dpb")
+}],
+"times": PackedFloat32Array(0, 3)
+}
+tracks/0/use_blend = true
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(3.26667, 3.6, 4.86667, 6.13333, 8.06667, 9.1, 11.2667, 13.2, 13.2382, 15.4049, 17.3382, 17.3837, 19.5504, 21.4837, 21.5395, 23.7062, 25.6395, 25.7095, 27.8762, 29.8095),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 6.28319, 25.1327, 0.0, 25.1327, 25.1327, 56.5487, 113.097, 25.1327, 56.5487, 113.097, 25.1327, 56.5487, 113.097, 25.1327, 56.5487, 113.097, 25.1327, 56.5487, 113.097]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.466667, 3.3, 4.8, 6.13333, 8.13333, 9.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, true, false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 8.93333, 9.06667, 9.66667, 10.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(1, 0, 0, 1), Color(0, 0, 1, 1), Color(0, 1, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_g6lwx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hl81x"]
+_data = {
+&"RESET": SubResource("Animation_g6lwx"),
+&"rave_bg": SubResource("Animation_faxov")
+}
 
 [node name="Victory" type="Node"]
+script = ExtResource("1_le47n")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -16.0
+offset_top = -14.0
+offset_right = 1175.0
+offset_bottom = 665.0
+color = Color(0, 0, 0, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_le47n")
+position = Vector2(566, 321)
+scale = Vector2(0.557426, 0.504049)
+texture = ExtResource("2_hl81x")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hl81x")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
