@@ -26,7 +26,7 @@ func _ready():
 	new_game()
 	
 func new_game():
-	score = 25
+	score = 0
 	$ScoreLabel.text = "Score: " + str(score)
 	game_over= false
 	game_running = false
