@@ -1,21 +1,26 @@
 extends Node
 
 @export var pipe_scene : PackedScene
+
 @onready var sfx_swoosh: AudioStreamPlayer = $sfx_swoosh
 @onready var sfx_score: AudioStreamPlayer = $sfx_score
 @onready var sfx_fall: AudioStreamPlayer = $sfx_fall
+@onready var scene_transition_animation= $SceneTransitionAnimation/AnimationPlayer
 
 var game_running: bool = false
 var game_over : bool = false
 var score : int
 var scroll 
 const SCROLL_SPEED : int = 200
-var game_over_position
+var game_over_position : float
+var win_position : float
+var win_condition_reached : bool = false
 var screen_size : Vector2i
 var pipes : Array
 const PIPE_DELAY : int = 200
 const PIPE_RANGE : int = 200
-var fall_sound_played : bool 
+var fall_sound_played : bool
+
 func _ready():
 	screen_size = get_window().size
 	new_game()
@@ -26,6 +31,7 @@ func new_game():
 	game_over= false
 	game_running = false
 	$Game_over.hide()
+	$Portal.hide()
 	get_tree().call_group("pipes", "queue_free")
 	pipes.clear()
 	generate_pipe()
@@ -60,7 +66,11 @@ func _process(delta):
 		$Background.scroll_offset.x = 0
 	if $Cat.falling == true:
 		$Background.scroll_offset.x = game_over_position
-		
+	if win_condition_reached == true:
+		$Background.scroll_offset.x = win_position
+		$Portal.show()
+		cat_move(delta)
+	
 func check_top():
 	if $Cat.position.y < 0:
 		$Cat.falling = true
@@ -79,7 +89,12 @@ func stop_game():
 	
 
 func _on_pipe_timer_timeout() -> void:
-	generate_pipe()
+	if score < 28:
+		generate_pipe()
+	elif score == 29:
+		await get_tree().create_timer(1).timeout
+		win_position = $Background.get_scroll_offset().x
+		win_condition_reached = true
 
 func generate_pipe():
 	var pipe = pipe_scene.instantiate()
@@ -90,6 +105,9 @@ func generate_pipe():
 	add_child(pipe)
 	pipes.append(pipe) 
 
+func cat_move(delta):
+	$Cat.position.x += SCROLL_SPEED * 2 * delta
+	
 func scored():
 	score += 1
 	$ScoreLabel.text = "Score: " + str(score)
@@ -105,3 +123,8 @@ func _on_game_over_restart():
 func _on_ground_hit() -> void:
 	$Cat.falling = true
 	stop_game()
+
+func _on_portal_body_entered(body: Node2D) -> void:
+	scene_transition_animation.play("fade_in")
+	await  get_tree().create_timer(0.5).timeout
+	get_tree().change_scene_to_file("res://scenes/victory.tscn")

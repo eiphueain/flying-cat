@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bbtsp7cgs34ge"]
+[gd_scene load_steps=11 format=3 uid="uid://bbtsp7cgs34ge"]
 
 [ext_resource type="Script" uid="uid://dag0c3b3m4nlx" path="res://scenes/main.gd" id="1_tefeu"]
 [ext_resource type="PackedScene" uid="uid://cjei1i8i4xsor" path="res://scenes/pipe.tscn" id="2_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://hobul36pa4rs" path="res://scenes/portal.tscn" id="3_choun"]
 [ext_resource type="PackedScene" uid="uid://bj38ptr2vfcrb" path="res://scenes/background.tscn" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://b160id05sov32" path="res://scenes/cat.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://c6243776mjo7w" path="res://scenes/game_over.tscn" id="5_tefeu"]
@@ -9,14 +10,11 @@
 [ext_resource type="AudioStream" uid="uid://04jldpjr3xld" path="res://assets/cat-meow.mp3" id="7_o6xl0"]
 [ext_resource type="AudioStream" uid="uid://1fjxm3s8s0ou" path="res://assets/swoosh.mp3" id="7_tipki"]
 [ext_resource type="AudioStream" uid="uid://brtx334v1bl6f" path="res://assets/point.mp3" id="9_85g3d"]
-[ext_resource type="PackedScene" uid="uid://cf16pw50e2fjn" path="res://scenes/scene_transition_animation.tscn" id="10_choun"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_choun"]
-size = Vector2(90, 649)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_tefeu")
 pipe_scene = ExtResource("2_jyhfs")
+portal_box = ExtResource("3_choun")
 
 [node name="Cat" parent="." instance=ExtResource("5_tbgi4")]
 
@@ -44,24 +42,13 @@ position = Vector2(0, 648)
 
 [node name="sfx_swoosh" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_tipki")
-volume_db = -0.16
 
 [node name="sfx_score" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_85g3d")
-volume_db = -0.16
 
 [node name="sfx_fall" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_o6xl0")
 
-[node name="SceneTransitionAnimation" parent="." instance=ExtResource("10_choun")]
-
-[node name="Portal" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal"]
-position = Vector2(1197, 324.5)
-shape = SubResource("RectangleShape2D_choun")
-
 [connection signal="timeout" from="PipeTimer" to="." method="_on_pipe_timer_timeout"]
 [connection signal="restart" from="Game_over" to="." method="_on_game_over_restart"]
 [connection signal="hit" from="Ground" to="." method="_on_ground_hit"]
-[connection signal="body_entered" from="Portal" to="." method="_on_portal_body_entered"]
